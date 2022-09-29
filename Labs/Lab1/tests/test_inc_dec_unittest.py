@@ -1,6 +1,6 @@
 import unittest  # The test framework
 
-import tutorial.inc_dec as inc_dec  # The code to test
+import src.tutorial.inc_dec as inc_dec  # The code to test
 
 
 class Test_TestIncrementDecrement(unittest.TestCase):

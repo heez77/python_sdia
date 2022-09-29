@@ -1,4 +1,4 @@
-import tutorial.inc_dec as inc_dec  # The code to test
+import src.tutorial.inc_dec as inc_dec  # The code to test
 
 
 def test_increment():
