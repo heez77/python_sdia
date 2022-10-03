@@ -12,12 +12,12 @@ def gradient2D(X:np.array)->tuple:
     assert X.ndim <=2, "The input array has more than 2 dimensions"
 
     XDh = np.zeros(X.shape)
-    for n in range(2,XDh.shape[1]):
-        XDh[:,n-2] = X[:,n]-X[:,n-1]
+    for n in range(1,XDh.shape[1]-1):
+        XDh[:,n-1] = X[:,n]-X[:,n-1]
 
     DvX = np.zeros(X.shape)
-    for m in range(2,XDh.shape[0]):
-        DvX[m-2,:] = X[m,:]-X[m-1,:]
+    for m in range(1,XDh.shape[0]-1):
+        DvX[m-1,:] = X[m,:]-X[m-1,:]
 
 
     return XDh, DvX
@@ -32,36 +32,28 @@ def tv(X:np.array)->float:
     Returns:
         float: returns the value of the TV for the input matrix X
     """
-    DX = gradient2D(X)
+    XDh, DvX = gradient2D(X)
     sum = 0
-    for m in range(DX.shape[0]):
-        for n in range(DX.shape[1]):
-            sum+= np.sqrt(DX[m,n,0]**2 + DX[m,n,1]**2)
+    for m in range(XDh.shape[0]):
+        for n in range(XDh.shape[1]):
+            sum+= np.sqrt(XDh[m,n]**2 + DvX[m,n]**2)
     return sum
 
 
-def gradient2D_adjoint(Y:np.array)->np.array:
-    """_summary_
-
-    Args:
-        Y (np.array): _description_
-
-    Returns:
-        np.array: _description_
-    """
+def gradient2D_adjoint(Y):
     (Yh, Yv) = Y
     YhDh = np.zeros(Yh.shape)
     DvYv = np.zeros(Yv.shape)
 
     YhDh[:,0] = - Yh[:,1]
-    YhDh[:,-1] =  Yh[:,-1]
-    for n in range(2,Yh.shape[1]):
-        YhDh[:, n-1] = -(Yh[:,n]- Yh[:,n-1])
+    YhDh[:,-1] = Yh[:,-1]
+    for n in range(1,Yh.shape[1]-1):
+        YhDh[:, n] = -(Yh[:,n]- Yh[:,n-1])
 
     DvYv[0,:] = - Yv[1, :]
     DvYv[-1,:] =  Yv[-1, :]
-    for m in range(2, Yv.shape[0]):
-        DvYv[m-1,:] = - (Yv[m, :]  - Yv[m-1, :])
+    for m in range(1, Yv.shape[0]-1):
+        DvYv[m,:] = - (Yv[m, :]  - Yv[m-1, :])
 
-    D_adjoint =YhDh + DvYv
+    D_adjoint = YhDh + DvYv
     return D_adjoint
