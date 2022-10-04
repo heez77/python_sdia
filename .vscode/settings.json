@@ -97,4 +97,5 @@
     // "python.testing.nosetestsEnabled": false,
     "python.testing.pytestEnabled": true,
     "nuxt.isNuxtApp": false,
+    "esbonio.sphinx.confDir": "${workspaceFolder}/docs",
 }

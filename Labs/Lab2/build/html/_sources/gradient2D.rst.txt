@@ -1,0 +1,4 @@
+2D Discrete Gradient operator
+=======================================
+
+.. autofunction:: lab2_functions.gradient2D
