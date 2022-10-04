@@ -21,7 +21,7 @@ class Test_TestGradient_2D_adjoint(unittest.TestCase):
         self.assertCountEqual([D_adjoint.shape[0], D_adjoint.shape[1]], [Yh2.shape[0], Yv2.shape[1]])
 
     def test_gradient2D_adjoint_equation(self):
-        rng = np.random.default_rng(42)
+        rng = np.random.default_rng(84548)
         M,N = rng.integers(low=2, high=20, size = 2)
         X3, Yh3, Yv3 = rng.random((M,N)), rng.random((M,N)), rng.random((M,N))
         XDh3, DvX3 = lab2_functions.gradient2D(X3)
