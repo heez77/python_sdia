@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Python_sdia'
+project = 'Lab2'
 copyright = '2022, Maxime & Jérémy'
 author = 'Maxime & Jérémy'
 release = '1.0'
